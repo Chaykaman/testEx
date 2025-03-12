@@ -2,24 +2,23 @@ package main
 
 import (
 	"log"
-	"testEx/api"
-	"testEx/configs"
-	"testEx/internal"
 
+	"github.com/Chaykaman/testEx/config"
+	"github.com/Chaykaman/testEx/internal"
+	v1 "github.com/Chaykaman/testEx/internal/controller/api/v1"
 	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
 	// Загрузка конфигурации
-	configs.LoadConfig()
+	config.LoadConfig()
 
 	// Инициализация базы данных
-	internal.InitDB(configs.GetDBURL())
+	internal.InitDB(config.GetDBURL())
 
 	app := fiber.New()
 
-	// Настройка маршрутов
-	api.SetupRoutes(app)
+	v1.SetupRoutes(app)
 
 	// Запуск сервера
 	log.Fatal(app.Listen(":3000"))

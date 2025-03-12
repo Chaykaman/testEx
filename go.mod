@@ -1,4 +1,4 @@
-module testEx
+module github.com/Chaykaman/testEx
 
 go 1.23.5
 

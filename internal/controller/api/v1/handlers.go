@@ -1,8 +1,7 @@
-package api
+package v1
 
 import (
-	"testEx/internal"
-
+	"github.com/Chaykaman/testEx/internal"
 	"github.com/gofiber/fiber/v2"
 )
 
