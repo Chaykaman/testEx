@@ -17,6 +17,21 @@ func InitDB(dbURL string) {
 	}
 }
 
+func GetTaskByID(id int) (Task, error) {
+	var task Task
+
+	// Выполняем SQL-запрос для получения задачи по ID
+	err := db.QueryRow(context.Background(), "SELECT id, title, description, status, created_at, updated_at FROM tasks WHERE id = $1", id).Scan(
+		&task.ID, &task.Title, &task.Description, &task.Status, &task.CreatedAt, &task.UpdatedAt,
+	)
+
+	if err != nil {
+		return Task{}, err
+	}
+
+	return task, nil
+}
+
 func GetTasks() ([]Task, error) {
 	rows, err := db.Query(context.Background(), "SELECT id, title, description, status, created_at, updated_at FROM tasks")
 	if err != nil {
