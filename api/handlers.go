@@ -25,7 +25,7 @@ func getTasks(c *fiber.Ctx) error {
 	tasks, err := internal.GetTasks()
 	if err != nil {
 		// Если произошла ошибка, возвращаем ошибку клиенту
-		return c.Status(500).JSON(fiber.Map{"error": "Failed to fetch tasks"})
+		return c.Status(500).JSON(fiber.Map{"error": "Не удалось получить задачи"})
 	}
 
 	// 2. Возвращаем задачи клиенту в формате JSON
@@ -35,7 +35,7 @@ func getTasks(c *fiber.Ctx) error {
 func updateTask(c *fiber.Ctx) error {
 	id, err := c.ParamsInt("id")
 	if err != nil {
-		return c.Status(400).JSON(fiber.Map{"error": "Invalid task ID"})
+		return c.Status(400).JSON(fiber.Map{"error": "Неверный идентификатор задачи"})
 	}
 
 	type UpdateTask struct {
@@ -46,7 +46,7 @@ func updateTask(c *fiber.Ctx) error {
 
 	var task UpdateTask
 	if err := c.BodyParser(&task); err != nil {
-		return c.Status(400).JSON(fiber.Map{"error": "Cannot parse JSON"})
+		return c.Status(400).JSON(fiber.Map{"error": "Невозможно проанализировать JSON"})
 	}
 
 	err = internal.UpdateTask(id, internal.Task{
@@ -55,22 +55,22 @@ func updateTask(c *fiber.Ctx) error {
 		Status:      task.Status,
 	})
 	if err != nil {
-		return c.Status(500).JSON(fiber.Map{"error": "Failed to update task"})
+		return c.Status(500).JSON(fiber.Map{"error": "Не удалось обновить задачу"})
 	}
 
-	return c.Status(200).JSON(fiber.Map{"message": "Task updated successfully"})
+	return c.Status(200).JSON(fiber.Map{"message": "Задача успешно обновлена"})
 }
 
 func deleteTask(c *fiber.Ctx) error {
 	id, err := c.ParamsInt("id")
 	if err != nil {
-		return c.Status(400).JSON(fiber.Map{"error": "Invalid task ID"})
+		return c.Status(400).JSON(fiber.Map{"error": "Неверный ID"})
 	}
 
 	err = internal.DeleteTask(id)
 	if err != nil {
-		return c.Status(500).JSON(fiber.Map{"error": "Failed to delete task"})
+		return c.Status(500).JSON(fiber.Map{"error": "Ошибка удаления"})
 	}
 
-	return c.Status(200).JSON(fiber.Map{"message": "Task deleted successfully"})
+	return c.Status(200).JSON(fiber.Map{"message": "Успешно удалён"})
 }

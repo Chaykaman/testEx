@@ -13,7 +13,7 @@ func LoadConfig() {
 	// Загрузка переменных окружения из .env файла
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatal("Ошибка загрузки файла .env")
 	}
 
 	dbURL = os.Getenv("DATABASE_URL")
@@ -22,7 +22,7 @@ func LoadConfig() {
 	}
 
 	// Отладочный вывод
-	log.Println("DATABASE_URL loaded:", dbURL)
+	log.Println("DATABASE_URL загружен:", dbURL)
 }
 
 func GetDBURL() string {
