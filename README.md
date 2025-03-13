@@ -57,7 +57,7 @@ cd testEx
 Запуск приложения `make run`
 
 Билд `make build`
-    
+
 
 ### 4. Использование API
 
@@ -75,4 +75,25 @@ API доступно по адресу http://localhost:3000. Поддержив
 - make run — запускает приложение напрямую (применяет миграции).
 - make build — собирает бинарный файл в bin/testEx.
 - make deps — загружает зависимости.
+
+
+# Скриншоты работоспособности
+
+База с данными
+
+![DB](src/img/database1.jpg)
+
+Показ данных базы в Postman
+
+![Postman](src/img/postman2.jpg)
+
+Редактирование данных через Postman
+
+![PostmanUpdate](src/img/postman3.jpg)
+
+Измененные данные в базе
+
+![DBUpdate](src/img/database4.jpg)
+
+
 
